@@ -1,69 +1,186 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kitchen glass screen: three ways to put it away</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kitchen glass screen · Mechanism study</title>
+<meta name="description" content="Interactive 3D study of three ways to close a kitchen with a glass screen and put it away.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='6' width='26' height='20' rx='3' fill='%231c1c1e'/%3E%3Crect x='7' y='10' width='8' height='12' fill='%23a9d8ea'/%3E%3Crect x='17' y='10' width='8' height='12' fill='%23a9d8ea'/%3E%3C/svg%3E">
+<meta property="og:title" content="Kitchen glass screen · Mechanism study">
+<meta property="og:description" content="Interactive 3D study: three ways to close a kitchen with a glass screen and put it away.">
+<meta property="og:image" content="https://marklimweekeong.github.io/kitchen-glass-screen/og.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#fbfaf8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
-:root{--surface-1:#f7f6f3;--surface-2:#fff;--text-primary:#1f1e1d;--text-secondary:#5f5e5a;--text-muted:#888780;--border:rgba(0,0,0,.12);--border-strong:rgba(0,0,0,.25);--border-accent:#378ADD;--bg-accent:#E6F1FB;--text-accent:#185FA5}
-*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;max-width:760px;margin:0 auto;padding:16px;color:var(--text-primary);line-height:1.55;-webkit-text-size-adjust:100%}
-h1{font-size:22px;font-weight:600;margin:4px 0 6px}p{margin:0 0 12px;color:var(--text-secondary);font-size:15px}
-button{font:inherit;font-size:15px;min-height:40px;padding:6px 12px;border-radius:8px;border:1px solid var(--border-strong);background:#fff;color:var(--text-primary);cursor:pointer}
-input[type=range]{height:32px}.sr-only{position:absolute;left:-9999px}
-table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 16px}td,th{text-align:left;padding:7px 6px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--text-secondary);font-weight:500}
-@media (max-width:520px){.lbl{font-size:11px!important;padding:1px 4px!important}}
-</style></head><body>
-<h1>Kitchen glass screen: three ways to put it away</h1>
-<p>A 3D sketch of the glass screen we are planning around our kitchen peninsula. Pick a way, then press <b>Put it away</b> or <b>Take it out</b> to see each step. Not to scale; sizes are approximate and will be measured on site.</p>
-<h2 class="sr-only">Interactive 3D model of the kitchen peninsula glass screen, showing step by step how a person puts the glass away and takes it out in three different ways.</h2>
-<style>
-.wb{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
-.wb button.on{background:var(--bg-accent);color:var(--text-accent);border-color:var(--border-accent)}
-.dim{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
-.lbl{position:absolute;transform:translate(-50%,-100%);font-size:12px;line-height:1.3;padding:2px 6px;border-radius:6px;background:var(--surface-2);color:var(--text-primary);border:0.5px solid var(--border);white-space:nowrap;pointer-events:none}
+:root{--bg:#fbfaf8;--card:#fff;--ink:#1c1c1e;--ink2:#5b5b60;--ink3:#8e8e93;--line:#e7e5e1;--line2:#d6d3cd;--track:#f0eeea;--accent:#1f5fae;--accent-bg:#eaf2fc;--hand:#e8742c;--r:14px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:880px;margin:0 auto;padding:28px 20px 40px}
+.eyebrow{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin:0 0 6px}
+h1{font-size:28px;line-height:1.2;font-weight:650;margin:0 0 8px;letter-spacing:-.01em}
+.lede{color:var(--ink2);margin:0 0 22px;max-width:640px}
+h2{font-size:16px;font-weight:650;margin:0 0 10px}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:var(--track);padding:4px;border-radius:12px;margin:0 0 14px}
+.seg button{all:unset;cursor:pointer;border-radius:9px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-height:44px;-webkit-tap-highlight-color:transparent}
+.seg button .t{font-weight:600;font-size:14px;color:var(--ink)}
+.seg .short{display:none}
+.seg button .d{font-size:12px;color:var(--ink2);line-height:1.35}
+.seg button[aria-selected=true]{background:var(--card);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04)}
+.seg button:focus-visible,.btn:focus-visible,.chip:focus-visible,.step:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.waydesc{display:none;font-size:13.5px;color:var(--ink2);margin:-4px 2px 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:0 0 14px}
+.viewer{padding:0;overflow:hidden}
+#stage{position:relative;width:100%;height:min(480px,78vw);min-height:300px;background:#f3f1ed;touch-action:none}
+#stage canvas{display:block}
+.ov{position:absolute;display:flex;gap:6px;z-index:3}
+.ov.tl{top:12px;left:12px}.ov.tr{top:12px;right:12px}.ov.br{bottom:12px;right:12px}
+.pill{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12.5px;color:var(--ink2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.pill b{color:var(--ink);font-weight:600}
+.mini{display:flex;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.mini button{all:unset;cursor:pointer;font-size:12.5px;padding:6px 10px;border-radius:7px;color:var(--ink2);display:flex;align-items:center;gap:4px;min-height:22px}
+.mini button[aria-pressed=true]{background:var(--ink);color:#fff}
+.mini button i{font-size:16px}
+.lbl{position:absolute;transform:translate(-50%,-100%);font-size:12px;line-height:1.25;padding:3px 7px;border-radius:7px;background:rgba(255,255,255,.95);color:var(--ink);border:1px solid var(--line2);white-space:nowrap;pointer-events:none;z-index:2;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.lbl.dim{background:var(--accent-bg);color:#0f3f78;border-color:#b9d2f0}
+.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:13px;z-index:4;background:#f3f1ed}
+.panel{padding:14px 16px 16px;border-top:1px solid var(--line)}
+.transport{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:600;padding:0 14px;height:42px;border-radius:10px;border:1px solid var(--line2);background:var(--card);color:var(--ink);-webkit-tap-highlight-color:transparent}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.icon{width:42px;padding:0}
+.btn i{font-size:18px}
+.scrub{display:flex;align-items:center;gap:8px;flex:1 1 300px;min-width:0}
+.scrub span{font-size:12px;color:var(--ink3);white-space:nowrap}
+input[type=range]{flex:1;accent-color:var(--ink);height:28px}
+.steps{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px}
+.step{all:unset;cursor:pointer;display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;padding:9px 10px;border-radius:10px;border:1px solid transparent;width:100%;box-sizing:border-box}
+.step .n{width:24px;height:24px;border-radius:50%;background:var(--track);color:var(--ink2);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.step .x{font-size:14px;color:var(--ink2)}
+.step.done .n{background:#dfe9dd;color:#2f5b2a}
+.step.now{background:var(--accent-bg);border-color:#cfe0f5}
+.step.now .n{background:var(--accent);color:#fff}
+.step.now .x{color:var(--ink)}
+.dirhead{display:flex;justify-content:space-between;align-items:baseline;margin:16px 0 0}
+.dirhead .lbl2{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3)}
+.hint{font-size:12.5px;color:var(--ink3);margin:12px 0 0;display:flex;align-items:baseline;gap:8px}.hint .dot{flex:none;transform:translateY(1px)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--hand)}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.fact .k{font-size:12px;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em;margin:0 0 3px}
+.fact .v{font-size:14px;color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--ink3);font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+td:last-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+footer{font-size:12.5px;color:var(--ink3);margin-top:6px}
+@media (max-width:640px){
+ .wrap{padding:20px 14px 32px}
+ h1{font-size:23px}
+ .seg{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .seg button{padding:9px 6px;align-items:center;text-align:center;justify-content:center}
+ .seg button .t{font-size:13px}
+ .seg button .d{display:none}
+ .waydesc{display:block}
+ .seg .full{display:none}
+ .seg .short{display:inline}
+ #stage{height:min(480px,92vw)}
+ .transport>.btn{flex:1 1 0}
+ .scrub{flex-basis:100%}
+ .facts{grid-template-columns:1fr}
+ .lbl{font-size:11px;padding:2px 6px}
+ .mini button span{display:none}
+ td:last-child{white-space:normal}
+}
 </style>
-<div class="wb" id="ways">
-<button data-w="1">1 Stack on show</button>
-<button data-w="2">2 Wood pocket</button>
-<button data-w="3">3 Display doors</button>
+</head>
+<body>
+<div class="wrap">
+<header>
+<p class="eyebrow">Mechanism study · not to scale</p>
+<h1>Kitchen glass screen</h1>
+<p class="lede">A glass screen closes the kitchen while cooking and is put away afterwards. Choose one of three ways below, then play each step to see how the glass moves and where it is stored.</p>
+</header>
+
+<nav class="seg" role="tablist" aria-label="Choose a way">
+<button role="tab" data-w="1" aria-selected="true"><span class="t"><span class="full">1 · Folding stack</span><span class="short">1 · Stack</span></span><span class="d">Folds against the column, on show</span></button>
+<button role="tab" data-w="2" aria-selected="false"><span class="t"><span class="full">2 · Timber pocket</span><span class="short">2 · Pocket</span></span><span class="d">Folds into a slim box, out of sight</span></button>
+<button role="tab" data-w="3" aria-selected="false"><span class="t"><span class="full">3 · Display doors</span><span class="short">3 · Display</span></span><span class="d">Slides along and becomes the cabinet doors</span></button>
+</nav>
+<p class="waydesc" id="wayDesc"></p>
+
+<section class="card viewer" aria-label="3D model">
+<div id="stage">
+<div class="loading" id="loading">Loading 3D model…</div>
+<div class="ov tl"><div class="pill" id="state"><b>Closed</b></div></div>
+<div class="ov tr"><div class="mini" role="group" aria-label="Labels">
+<button id="bNames" aria-pressed="true">Names</button><button id="bSizes" aria-pressed="false">Sizes</button></div></div>
+<div class="ov br"><div class="mini" role="group" aria-label="Camera">
+<button data-v="sofa" aria-pressed="true" title="Living room view"><i class="ti ti-armchair" aria-hidden="true"></i><span>Living room</span></button>
+<button data-v="top" aria-pressed="false" title="Plan view"><i class="ti ti-layout-board" aria-hidden="true"></i><span>Plan</span></button>
+<button data-v="kitchen" aria-pressed="false" title="Kitchen view"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Kitchen</span></button>
+</div></div>
 </div>
-<div id="stage" style="position:relative;width:100%;height:min(460px,95vw);min-height:300px;border-radius:12px;border:0.5px solid var(--border);overflow:hidden;background:var(--surface-1)"></div>
-<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 8px">
-<button id="bAway">Put it away <i class="ti ti-player-play" aria-hidden="true"></i></button>
-<button id="bOut">Take it out <i class="ti ti-player-play" aria-hidden="true"></i></button>
-<button id="bPrev" aria-label="Previous step"><i class="ti ti-chevron-left" aria-hidden="true"></i></button>
-<button id="bNext" aria-label="Next step"><i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+<div class="panel">
+<div class="transport">
+<button class="btn primary" id="bAway"><i class="ti ti-player-play" aria-hidden="true"></i>Put away</button>
+<button class="btn" id="bOut"><i class="ti ti-player-play" aria-hidden="true"></i>Take out</button>
+<div class="scrub"><button class="btn icon" id="bPrev" aria-label="Previous step"><i class="ti ti-chevron-left" aria-hidden="true"></i></button><span>Closed</span><input type="range" id="t" min="0" max="100" step="1" value="0" aria-label="Closed to stored"><span>Stored</span><button class="btn icon" id="bNext" aria-label="Next step"><i class="ti ti-chevron-right" aria-hidden="true"></i></button></div>
 </div>
-<div style="display:flex;align-items:center;gap:8px;margin:0 0 8px">
-<span style="font-size:13px;color:var(--text-secondary)">Closed</span>
-<input type="range" id="t" min="0" max="100" step="1" value="0" style="flex:1;min-width:120px">
-<span style="font-size:13px;color:var(--text-secondary)">Stored</span>
+<div class="dirhead"><span class="lbl2" id="dirLabel">Steps to put away</span></div>
+<ol class="steps" id="steps"></ol>
+<p class="hint"><span class="dot" aria-hidden="true"></span><span>Orange dot: where your hand goes. Drag to rotate, pinch or scroll to zoom.</span></p>
 </div>
-<div id="cap" style="font-size:14px;line-height:1.5;color:var(--text-primary);min-height:42px;margin:0 0 8px"></div>
-<div class="wb">
-<button id="bNames">Names</button>
-<button id="bSizes">Sizes</button>
-<button data-v="sofa">Sofa view</button>
-<button data-v="top">Top view</button>
-<button data-v="kitchen">Kitchen view</button>
-<span style="font-size:12px;color:var(--text-muted);align-self:center">Drag to rotate, pinch or scroll to zoom. Orange dot = where your hand goes.</span>
+</section>
+
+<section class="card">
+<h2 id="aboutTitle">About this way</h2>
+<div class="facts" id="facts"></div>
+</section>
+
+<section class="card">
+<h2>Approximate sizes</h2>
+<table>
+<thead><tr><th>Part</th><th>Size</th></tr></thead>
+<tbody>
+<tr><td>Peninsula</td><td>2.1 m long × 0.65 m deep, 0.9 m high</td></tr>
+<tr><td>Underside of concrete beam</td><td>about 2.4 m above floor</td></tr>
+<tr><td>Glass over the counter</td><td>about 1.45–1.5 m tall</td></tr>
+<tr><td>Walkway to fridge cabinet</td><td>about 0.95 m wide</td></tr>
+<tr><td>Display cabinet</td><td>about 1.2 m wide</td></tr>
+<tr><td>Folding panels (ways 1, 2)</td><td>4 × about 53 × 145 cm</td></tr>
+<tr><td>Sliding panels (way 3)</td><td>4 × about 55 × 150 cm</td></tr>
+<tr><td>Side panels (ways 1, 3)</td><td>2 × about 84 × 240 cm</td></tr>
+</tbody>
+</table>
+</section>
+
+<footer>Sizes are estimates from design renders and will be measured on site. Frames: slim matt black aluminium. Glass: clear tempered. Tracks hang under the beam behind a cover strip.</footer>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
+(function(){
+const stage=document.getElementById('stage');
+if(typeof THREE==='undefined'){document.getElementById('loading').textContent='The 3D model could not load. Please check your connection and reload.';return;}
+let Wd=stage.clientWidth,Ht=stage.clientHeight;
 const st={way:1,t:0,target:null,dir:1};
-const stage=document.getElementById('stage');let Wd=stage.clientWidth,Ht=stage.clientHeight;
-const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(38,Wd/Ht,5,5000);
-const ren=new THREE.WebGLRenderer({antialias:true,alpha:true});ren.setPixelRatio(window.devicePixelRatio);ren.setSize(Wd,Ht);stage.appendChild(ren.domElement);
-const ctl=new THREE.OrbitControls(cam,ren.domElement);ctl.enableDamping=true;
-scene.add(new THREE.AmbientLight(0xffffff,0.62));const dl=new THREE.DirectionalLight(0xffffff,0.55);dl.position.set(300,500,420);scene.add(dl);
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(36,Wd/Ht,5,5000);
+let ren;try{ren=new THREE.WebGLRenderer({antialias:true,alpha:true});}catch(e){document.getElementById('loading').textContent='3D is not supported on this device.';return;}
+ren.setPixelRatio(Math.min(2,window.devicePixelRatio||1));ren.setSize(Wd,Ht);stage.insertBefore(ren.domElement,stage.firstChild);
+const ctl=new THREE.OrbitControls(cam,ren.domElement);ctl.enableDamping=true;ctl.minDistance=180;ctl.maxDistance=1600;ctl.maxPolarAngle=Math.PI*0.495;
+scene.add(new THREE.HemisphereLight(0xffffff,0xd8cdbb,0.55));scene.add(new THREE.AmbientLight(0xffffff,0.25));const dl=new THREE.DirectionalLight(0xffffff,0.55);dl.position.set(300,500,420);scene.add(dl);
 const M=c=>new THREE.MeshLambertMaterial({color:c}),TM=(c,o)=>new THREE.MeshLambertMaterial({color:c,transparent:true,opacity:o,depthWrite:false});
-const WOOD=M(0x4a3222),STONE=M(0xebe3d4),SHELF=M(0xead9b8),STEEL=M(0xb7bcc2),FLOOR=M(0xc9b597),FR=M(0x151515),OVEN=M(0x1d1d1d),MAG=M(0x8a8a8a);
-const GL=TM(0x9fd3e6,0.3),BEAM=TM(0xf3efe7,0.42),POCK=TM(0x7a5236,0.5),HAND=M(0xe8742c);
-const EDGE=new THREE.LineBasicMaterial({color:0x222222,transparent:true,opacity:0.35});
+const WOOD=M(0x4a3222),STONE=M(0xefe8db),SHELF=M(0xece0c6),STEEL=M(0xbfc4c9),FLOOR=M(0xe6ddcd),FR=M(0x161616),OVEN=M(0x1d1d1d),MAG=M(0x9a9a9a);
+const GL=TM(0xa9d8ea,0.28),BEAM=TM(0xf6f3ee,0.5),POCK=TM(0x7a5236,0.5),HAND=M(0xe8742c);
+const EDGE=new THREE.LineBasicMaterial({color:0x2a2a2a,transparent:true,opacity:0.28});
 function box(x0,x1,y0,y1,z0,z1,mat,edges=true,parent=scene){const m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0),mat);m.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);if(edges)m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),EDGE));parent.add(m);return m;}
 function panel(w,h){const g=new THREE.Group(),f=2.5,t=2.5;const fr=(x,y,ww,hh)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(ww,hh,t),FR);m.position.set(x+ww/2,y+hh/2,0);g.add(m)};fr(0,0,w,f);fr(0,h-f,w,f);fr(0,0,f,h);fr(w-f,0,f,h);const gl=new THREE.Mesh(new THREE.BoxGeometry(w-2*f,h-2*f,0.8),GL);gl.position.set(w/2,h/2,0);g.add(gl);scene.add(g);return g;}
 function slab(w,h,mat){const g=new THREE.Group(),m=new THREE.Mesh(new THREE.BoxGeometry(w,h,1.8),mat);m.position.set(w/2,h/2,0);m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),EDGE));g.add(m);scene.add(g);return g;}
 function place(p,x,y,z,a){p.position.set(x,y,z);p.rotation.y=a;}
-const fl=new THREE.Mesh(new THREE.PlaneGeometry(900,800),FLOOR);fl.rotation.x=-Math.PI/2;fl.position.set(50,0,-80);scene.add(fl);
+scene.background=new THREE.Color(0xf3f1ed);scene.fog=new THREE.Fog(0xf3f1ed,700,1900);const fl=new THREE.Mesh(new THREE.PlaneGeometry(6000,6000),FLOOR);fl.rotation.x=-Math.PI/2;fl.position.set(50,0,-80);scene.add(fl);
 box(-125,0,0,240,-100,-35,WOOD);box(-112,-52,118,160,-101,-100,OVEN,false);
 box(-125,0,0,90,-35,0,WOOD);box(-125,0,236,240,-35,0,WOOD);box(-125,-120,90,236,-35,0,WOOD);box(-5,0,90,236,-35,0,WOOD);
 box(-120,-5,90,236,-35,-30,SHELF,false);for(const y of[125,160,195])box(-120,-5,y,y+2,-30,-2,SHELF);
@@ -80,25 +197,27 @@ const DP=new THREE.Group();scene.add(DP);box(224,226,0,240,-258,-158,POCK,true,D
 const W=52.5,L=[0,1,2,3].map(()=>panel(W,144)),S=[0,1,2,3].map(()=>panel(W+2,150)),C=panel(62,144),D=panel(95,236);
 const SP=[panel(84,236),panel(84,236)];const trkS=box(212,222,238,243,-248,10,FR,false);
 const hand=new THREE.Mesh(new THREE.SphereGeometry(6,20,14),HAND);scene.add(hand);
-const labels={};function lab(k,txt){const d=document.createElement('div');d.className='lbl';d.textContent=txt;stage.appendChild(d);labels[k]=d;}
-lab('disp','Display cabinet');lab('tall','Tall unit');lab('pen','Peninsula');lab('fr','Fridge');lab('door','Walkway door');lab('corner','Corner panel');lab('trk','Track in beam');lab('pk','Wood pocket');lab('side','Pocket side door');lab('dpk','Door pocket');lab('mag','Magnet catch');lab('t3','Two tracks in beam');lab('sp','Side panels');lab('trkS','Side tracks in ceiling');
-const cl=v=>Math.max(0,Math.min(1,v));
-const DIMM=new THREE.LineBasicMaterial({color:0x185FA5});const dimG=new THREE.Group();scene.add(dimG);
-function dline(a,b){const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...a),new THREE.Vector3(...b)]);dimG.add(new THREE.Line(g,DIMM));}
+const DIMM=new THREE.LineBasicMaterial({color:0x1f5fae});const dimG=new THREE.Group();scene.add(dimG);
+function dline(a,b){dimG.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...a),new THREE.Vector3(...b)]),DIMM));}
 dline([0,96,14],[210,96,14]);dline([0,90,14],[0,102,14]);dline([210,90,14],[210,102,14]);
 dline([228,96,0],[228,96,-65]);dline([222,96,0],[234,96,0]);dline([222,96,-65],[234,96,-65]);
 dline([232,2,-65],[232,2,-160]);dline([226,2,-65],[238,2,-65]);dline([226,2,-160],[238,2,-160]);
-dline([-128,0,14],[-128,240,14]);dline([-134,240,14],[-122,240,14]);
-dline([-120,94,10],[-5,94,10]);
-const dims=[['Peninsula 2.1 m long',[125,82,16]],['Depth 0.65 m',[246,100,-40]],['Counter 0.9 m high',[2,28,6]],['Beam underside 2.4 m',[-128,250,16]],['Glass about 1.45 m tall',[150,170,8]],['Walkway 0.95 m',[234,14,-112]],['Display cabinet 1.2 m',[-62,100,14]]];
-const dimEls=dims.map(d=>{const e=document.createElement('div');e.className='lbl dim';e.textContent=d[0];stage.appendChild(e);return e;});
-let showSizes=false;function setSizes(on){showSizes=on;dimG.visible=on;dimEls.forEach(e=>e.style.display=on?'':'none');document.getElementById('bSizes').classList.toggle('on',on);document.getElementById('bNames').classList.toggle('on',!on);update();}
-const PH={1:[[0,.1,'Unlatch the end panel from the side panel at the corner.','Latch the end panel to the side panel at the corner. The kitchen is now closed.'],[.1,.3,'Slide the two side panels back along the fridge cabinet. They stack there, out of the way.','Pull the two side panels out from beside the fridge to the front corner.'],[.3,.9,'Push the end panel towards the column. The four panels fold up like a concertina.','Pull the end panel by its handle along the counter. The panels unfold behind it.'],[.9,1,'Press the folded stack against the column until the magnet catches. Stored: the stack is on show at the column, nothing at the corner.','Pull the stack off its magnet catch on the column.']],
-2:[[0,.15,'Slide the walkway door into its pocket beside the fridge.','Pull the walkway door out of its pocket to the peninsula. The kitchen is now closed.'],[.15,.3,'Swing the corner panel in, flat against the end panel.','Swing the corner panel out to close off the end of the peninsula.'],[.3,.4,'Open the pocket\'s side door.','Close the pocket side door behind the glass.'],[.4,.88,'Push the end panel back. The panels fold up into the pocket.','Pull the end panel out. The panels unfold along the counter.'],[.88,1,'Close the side door. Stored: the glass is inside the wood pocket.','Open the pocket\'s side door.']],
-3:[[0,.15,'Slide the two side panels back along the fridge cabinet. They stack there, out of the way.','Pull the two side panels out from beside the fridge to meet the front glass. The kitchen is now closed.'],[.15,.55,'Push the left pair along the tracks. It parks over the left half of the display cabinet.','Pull the left pair out from the display cabinet to the middle of the peninsula.'],[.55,.95,'Push the right pair along. It parks over the right half of the display cabinet.','Pull the right pair from the display cabinet out to the corner.'],[.95,1,'Stored: the panels are the display cabinet doors, and nothing is left at the corner.','Start from the display cabinet: its glass doors are the screen panels.']]};
-let handPos=[0,0,0];
+dline([-128,0,14],[-128,240,14]);dline([-134,240,14],[-122,240,14]);dline([-120,94,10],[-5,94,10]);
+const cl=v=>Math.max(0,Math.min(1,v));
+const PH={1:[[0,.1,'Unlatch the end panel from the side panel at the corner.','Latch the end panel to the side panel at the corner. The kitchen is closed.'],[.1,.3,'Slide the two side panels back along the fridge cabinet, where they stack.','Pull the two side panels out from beside the fridge to the front corner.'],[.3,.9,'Push the end panel towards the column. The four panels fold like a concertina.','Pull the end panel along the counter. The panels unfold behind it.'],[.9,1,'Press the folded stack against the column until the magnet catch holds it.','Release the folded stack from its magnet catch on the column.']],
+2:[[0,.15,'Slide the walkway door into its pocket beside the fridge.','Pull the walkway door out of its pocket to the peninsula. The kitchen is closed.'],[.15,.3,'Swing the corner panel in, flat against the end panel.','Swing the corner panel out to close the end of the peninsula.'],[.3,.4,'Open the pocket side door.','Close the pocket side door behind the glass.'],[.4,.88,'Push the end panel back. The panels fold into the pocket.','Pull the end panel out. The panels unfold along the counter.'],[.88,1,'Close the side door. The glass is out of sight.','Open the pocket side door.']],
+3:[[0,.15,'Slide the two side panels back along the fridge cabinet, where they stack.','Pull the two side panels out to meet the front glass. The kitchen is closed.'],[.15,.55,'Push the left pair along the tracks to the left half of the display cabinet.','Pull the left pair out from the display cabinet to the middle of the peninsula.'],[.55,.95,'Push the right pair along to the right half of the display cabinet.','Pull the right pair out from the display cabinet to the corner.'],[.95,1,'The four panels now serve as the display cabinet doors.','Start at the display cabinet: its doors are the screen panels.']]};
+const FACTS={1:[['Stored','A folded stack of four panels standing on the counter against the column, about 15 × 55 cm. Side panels stack beside the fridge.'],['Hardware','Top-hung bi-fold on one track under the beam. Two ceiling tracks for the side panels.'],['Visible when stored','The glass stack at the column.']],
+2:[['Stored','Inside a 16 cm timber pocket on the end of the counter. The walkway door sits in a pocket beside the fridge.'],['Hardware','Top-hung bi-fold, five panels including the corner panel. Pocket and side door built by the carpenter.'],['Visible when stored','Only the timber pocket.']],
+3:[['Stored','Two layers of panels in front of the display cabinet, acting as its doors. Side panels stack beside the fridge.'],['Hardware','Synchronised sliding pairs on two tracks, about 3.3 m long, under the beam.'],['Visible when stored','Nothing extra. The display cabinet is open while you cook.']]};
+const LBL=[['pen','Peninsula',()=>[110,96,-30]],['disp','Display cabinet',()=>[-70,215,3]],['tall','Tall unit',()=>[-95,252,-95]],['fr','Fridge',()=>[175,250,-195]],['sp','Side panels',()=>{const su=st.way==1?cl((st.t-.1)/.2):cl(st.t/.15);const a0=st.way==1?0:8;return[222,236,a0+(-160-a0)*su-40];}],['door','Walkway door',()=>[214,150,-112-95*cl(st.t/PH[2][0][1])]],['corner','Corner panel',()=>[211,240,-34]],['pk','Timber pocket',()=>[8,128,2]],['side','Pocket side door',()=>[17,205,-55]],['dpk','Door pocket',()=>[225,250,-215]],['mag','Magnet catch',()=>[0,190,-30]],['trk','Track in beam',()=>[170,272,-5]],['t3','Two tracks in beam',()=>[110,272,10]]];
+const DIMS=[['Peninsula 2.1 m',[125,82,16]],['Depth 0.65 m',[246,100,-40]],['Counter 0.9 m',[2,28,6]],['Beam underside 2.4 m',[-128,250,16]],['Glass ≈ 1.45 m',[150,170,8]],['Walkway 0.95 m',[234,14,-112]],['Display 1.2 m',[-62,100,14]]];
+const lblEl={};LBL.forEach(([k,txt])=>{const d=document.createElement('div');d.className='lbl';d.textContent=txt;stage.appendChild(d);lblEl[k]=d;});
+const dimEl=DIMS.map(d=>{const e=document.createElement('div');e.className='lbl dim';e.textContent=d[0];stage.appendChild(e);return e;});
+let showSizes=false;
+function lblOn(k){const w=st.way,t=st.t;if(showSizes)return false;switch(k){case'pk':case'side':case'dpk':return w==2;case'mag':return w==1;case'trk':return w<3;case't3':return w==3;case'corner':return w==2&&t<=0.2;case'door':return w==2;case'sp':return w!=2;default:return true;}}
 function update(){const t=st.t,w=st.way,ph=PH[w],u=ph.map(p=>cl((t-p[0])/(p[1]-p[0])));
-L.forEach(p=>p.visible=w<3);S.forEach(p=>p.visible=w==3);dispGlass.forEach(p=>p.visible=w!=3);PK.visible=side.visible=DP.visible=w==2;trk1.visible=w<3;trk3a.visible=trk3b.visible=w==3;mag.visible=w==1;
+L.forEach(p=>p.visible=w<3);S.forEach(p=>p.visible=w==3);dispGlass.forEach(p=>p.visible=w!=3);PK.visible=side.visible=DP.visible=w==2;trk1.visible=w<3;trk3a.visible=trk3b.visible=w==3;mag.visible=w==1;dimG.visible=showSizes;
 let hp=null;D.visible=C.visible=w==2;SP.forEach(p=>p.visible=w!=2);trkS.visible=w!=2;trkD.visible=w==2;
 if(w==2){const dz=-65-95*u[0];place(D,214,0,dz,Math.PI/2);if(u[0]>0&&u[0]<1||t<ph[0][1])hp=[214,120,dz];}
 else{const su=w==1?u[1]:u[0],a0=w==1?0:8,sw=84,s0=a0+(-160-a0)*su,s1=(a0-sw)+(-160-(a0-sw))*su;place(SP[0],220,0,s0,Math.PI/2);place(SP[1],215,0,s1,Math.PI/2);const sp0=w==1?ph[1]:ph[0];if(t>=sp0[0]&&t<sp0[1])hp=[222,120,s0];}
@@ -108,43 +227,44 @@ else{let ca=Math.PI/2+Math.PI/2*u[1];if(u[3]>0)ca=Math.PI-th;place(C,px,92,pz-3*
 const sx=16+58*Math.cos(sa),sz=-62-58*Math.sin(sa);if(t>=ph[1][0]&&t<ph[2][0])hp=[px+62*Math.cos(ca),150,pz-62*Math.sin(ca)];if((t>=ph[2][0]&&t<ph[3][0])||t>=ph[4][0])hp=[sx,150,sz];if(t>=ph[3][0]&&t<ph[4][0])hp=[px,150,pz];}}
 else{const p1=u[1],p2=u[2],xs=[0+(-120-0)*p1,52.5+(-120-52.5)*p1,105+(-62.5-105)*p2,157.5+(-62.5-157.5)*p2],zs=[4,9,4,9];for(let i=0;i<4;i++)place(S[i],xs[i],86,zs[i],0);
 if(t>=ph[1][0]&&t<ph[2][0])hp=[xs[1]+52,150,12];if(t>=ph[2][0]&&t<ph[3][0])hp=[xs[3]+52,150,12];if(t>=ph[3][0])hp=[-62,170,12];}
-if(t>=1-1e-6&&st.dir>0)hp=null;hand.visible=!!hp;if(hp){handPos=hp;hand.position.set(...hp);}
-labels.pk.style.display=labels.side.style.display=labels.dpk.style.display=w==2?'':'none';labels.mag.style.display=w==1?'':'none';labels.trk.style.display=w<3?'':'none';labels.t3.style.display=w==3?'':'none';labels.corner.style.display=(w!=2||t>0.2)?'none':'';labels.door.style.display=w==2?'':'none';labels.sp.style.display=labels.trkS.style.display=w!=2?'':'none';
-let k=ph.findIndex(p=>t<p[1]||(p===ph[ph.length-1]));if(st.dir<0){k=ph.findIndex(p=>t<=p[1]);if(k<0)k=ph.length-1;}
-const n=ph.length;if(st.dir>0){document.getElementById('cap').textContent='Putting away, step '+(k+1)+' of '+n+': '+ph[k][2];}else{const r=n-k;document.getElementById('cap').textContent='Taking out, step '+r+' of '+n+': '+ph[k][3];}
-document.getElementById('t').value=Math.round(t*100);}
-const anchors={disp:[-70,215,3],tall:[-95,252,-95],pen:[110,94,-30],fr:[175,250,-195],trk:[170,272,-5],t3:[110,272,10],pk:[8,128,2],side:[17,205,-55],dpk:[225,250,-215],mag:[0,190,-30]};
-function lp(k){if(k=='sp'){const su=st.way==1?cl((st.t-.1)/.2):cl(st.t/.15);return[222,236,(st.way==1?0:8)+(-160-(st.way==1?0:8))*su-40];}if(k=='trkS')return[217,262,-95];if(k=='door')return[214,150,-112-95*cl(st.t/PH[st.way][0][1])];if(k=='corner')return[211,240,-34];return anchors[k];}
-function placeLabels(){dims.forEach((d,i)=>{const v=new THREE.Vector3(...d[1]).project(cam),e=dimEls[i];if(v.z>1){e.style.visibility='hidden';return;}e.style.visibility='';e.style.left=((v.x+1)/2*Wd)+'px';e.style.top=((1-v.y)/2*Ht)+'px';});for(const k in labels){if(showSizes){labels[k].style.visibility='hidden';continue;}const v=new THREE.Vector3(...lp(k)).project(cam),d=labels[k];if(v.z>1){d.style.visibility='hidden';continue;}d.style.visibility='';d.style.left=((v.x+1)/2*Wd)+'px';d.style.top=((1-v.y)/2*Ht)+'px';}}
-const views={sofa:[[560,320,470],[45,100,-70]],top:[[60,880,170],[45,100,-70]],kitchen:[[320,190,-130],[40,125,-30]]};
-let curView='sofa';function setView(v){curView=v;const p=views[v][0],tg=views[v][1],f=Math.max(1,1.2/(Wd/Ht));cam.position.set(tg[0]+(p[0]-tg[0])*f,tg[1]+(p[1]-tg[1])*f,tg[2]+(p[2]-tg[2])*f);ctl.target.set(...tg);ctl.update();}
+if((t>=1-1e-6&&st.dir>0)||(t<=1e-6&&st.dir<0))hp=null;hand.visible=!!hp;if(hp)hand.position.set(...hp);
+renderSteps();document.getElementById('t').value=Math.round(t*100);}
+function curStep(){const ph=PH[st.way];let k=ph.findIndex(p=>st.t<p[1]);if(k<0)k=ph.length-1;if(st.dir<0){k=ph.findIndex(p=>st.t<=p[1]);if(k<0)k=ph.length-1;}return k;}
+let stepsKey='';
+function renderSteps(){const ph=PH[st.way],n=ph.length,k=curStep(),out=st.dir<0;const order=out?[...ph.keys()].reverse():[...ph.keys()];
+const key=st.way+'|'+st.dir;const ol=document.getElementById('steps');
+if(key!==stepsKey){stepsKey=key;document.getElementById('dirLabel').textContent=out?'Steps to take out':'Steps to put away';ol.innerHTML='';
+order.forEach((idx,i)=>{const li=document.createElement('li');const b=document.createElement('button');b.className='step';b.dataset.idx=idx;b.innerHTML='<span class="n">'+(i+1)+'</span><span class="x"></span>';b.querySelector('.x').textContent=out?ph[idx][3]:ph[idx][2];b.onclick=()=>{if(out){st.dir=-1;st.target=ph[idx][0];}else{st.dir=1;st.target=ph[idx][1];}};li.appendChild(b);ol.appendChild(li);});}
+const atEnd=(!out&&st.t>=1-1e-6)||(out&&st.t<=1e-6),atStart=(!out&&st.t<=1e-6)||(out&&st.t>=1-1e-6);
+ol.querySelectorAll('.step').forEach(b=>{const idx=+b.dataset.idx;const pos=order.indexOf(idx),cur=order.indexOf(k);b.classList.toggle('now',!atEnd&&!atStart&&pos===cur);b.classList.toggle('done',atEnd||pos<cur&&!atStart);});
+const s=document.getElementById('state');if(st.t<=1e-6)s.innerHTML='<b>Closed</b> · ready to cook';else if(st.t>=1-1e-6)s.innerHTML='<b>Stored</b> · kitchen open';else s.innerHTML='<b>'+(out?'Taking out':'Putting away')+'</b> · step '+(order.indexOf(k)+1)+' of '+n;}
+function setFacts(){const f=FACTS[st.way];document.getElementById('facts').innerHTML='';f.forEach(([k,v])=>{const d=document.createElement('div');d.className='fact';d.innerHTML='<p class="k"></p><p class="v" style="margin:0"></p>';d.querySelector('.k').textContent=k;d.querySelector('.v').textContent=v;document.getElementById('facts').appendChild(d);});}
+function placeLabels(){const placed=[];const put=(el,p,on)=>{if(!on){el.style.display='none';return;}el.style.display='';const v=new THREE.Vector3(...p).project(cam);if(v.z>1||Math.abs(v.x)>1.05||Math.abs(v.y)>1.05){el.style.visibility='hidden';return;}const x=(v.x+1)/2*Wd,y=(1-v.y)/2*Ht,w=el.offsetWidth,h=el.offsetHeight;const r=[x-w/2-3,y-h-3,x+w/2+3,y+3];if(placed.some(q=>!(r[2]<q[0]||r[0]>q[2]||r[3]<q[1]||r[1]>q[3]))||r[1]<44&&(r[0]<170||r[2]>Wd-150)){el.style.visibility='hidden';return;}placed.push(r);el.style.visibility='';el.style.left=x+'px';el.style.top=y+'px';};
+DIMS.forEach((d,i)=>put(dimEl[i],d[1],showSizes));LBL.forEach(([k,,fn])=>put(lblEl[k],fn(),lblOn(k)));}
+const views={sofa:[[560,320,470],[45,105,-70]],top:[[60,880,170],[45,100,-70]],kitchen:[[320,190,-130],[40,125,-30]]};let curView='sofa';
+function setView(v){curView=v;const p=views[v][0],tg=views[v][1],f=Math.max(1,1.25/(Wd/Ht));cam.position.set(tg[0]+(p[0]-tg[0])*f,tg[1]+(p[1]-tg[1])*f,tg[2]+(p[2]-tg[2])*f);ctl.target.set(...tg);ctl.update();document.querySelectorAll('[data-v]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));}
 function fit(){Wd=stage.clientWidth;Ht=stage.clientHeight;ren.setSize(Wd,Ht);cam.aspect=Wd/Ht;cam.updateProjectionMatrix();}
 window.addEventListener('resize',()=>{fit();setView(curView);});
-function setWay(w){st.way=w;document.querySelectorAll('#ways button').forEach(b=>b.classList.toggle('on',+b.dataset.w==w));update();}
-document.querySelectorAll('#ways button').forEach(b=>b.onclick=()=>setWay(+b.dataset.w));
+const DESC={1:'Panels fold against the column and stay on show.',2:'Panels fold into a slim timber box, out of sight.',3:'Panels slide along and become the display cabinet doors.'};
+function setWay(w){st.way=w;document.getElementById('wayDesc').textContent=DESC[w];st.t=0;st.dir=1;st.target=null;stepsKey='';document.querySelectorAll('[data-w]').forEach(b=>b.setAttribute('aria-selected',+b.dataset.w===w));setFacts();update();}
+function setSizes(on){showSizes=on;document.getElementById('bSizes').setAttribute('aria-pressed',on);document.getElementById('bNames').setAttribute('aria-pressed',!on);update();}
+document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>setWay(+b.dataset.w));
 document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>setView(b.dataset.v));
-const sl=document.getElementById('t');sl.oninput=()=>{const nt=sl.value/100;st.dir=nt>=st.t?1:-1;st.t=nt;st.target=null;update();};
-document.getElementById('bAway').onclick=()=>{if(st.t>=1)st.t=0;st.dir=1;st.target=1;};
-document.getElementById('bOut').onclick=()=>{if(st.t<=0)st.t=1;st.dir=-1;st.target=0;};
+document.getElementById('bNames').onclick=()=>setSizes(false);document.getElementById('bSizes').onclick=()=>setSizes(true);
+const sl=document.getElementById('t');sl.oninput=()=>{const nt=sl.value/100;if(nt!==st.t){st.dir=nt>st.t?1:-1;stepsKey='';}st.t=nt;st.target=null;update();};
+document.getElementById('bAway').onclick=()=>{if(st.t>=1)st.t=0;if(st.dir!==1)stepsKey='';st.dir=1;st.target=1;};
+document.getElementById('bOut').onclick=()=>{if(st.t<=0)st.t=1;if(st.dir!==-1)stepsKey='';st.dir=-1;st.target=0;};
 function bounds(){return[0,...PH[st.way].map(p=>p[1])];}
-document.getElementById('bNext').onclick=()=>{const b=bounds();const nb=b.find(x=>x>st.t+1e-3);if(nb!==undefined){st.dir=1;st.target=nb;}};
-document.getElementById('bPrev').onclick=()=>{const b=bounds().slice().reverse();const nb=b.find(x=>x<st.t-1e-3);if(nb!==undefined){st.dir=-1;st.target=nb;}};
-fit();setView('sofa');setWay(1);document.getElementById('bSizes').onclick=()=>setSizes(true);document.getElementById('bNames').onclick=()=>setSizes(false);setSizes(false);
-let clock=0,last=performance.now();function loop(now){requestAnimationFrame(loop);now=now||performance.now();const dt=Math.min(0.1,Math.max(0,(now-last)/1000));last=now;clock+=dt*3.6;if(st.target!==null){const sp=0.22*dt;if(Math.abs(st.target-st.t)<=sp){st.t=st.target;st.target=null;}else st.t+=Math.sign(st.target-st.t)*sp;update();}
+document.getElementById('bNext').onclick=()=>{const nb=bounds().find(x=>x>st.t+1e-3);if(nb!==undefined){if(st.dir!==1)stepsKey='';st.dir=1;st.target=nb;}};
+document.getElementById('bPrev').onclick=()=>{const nb=bounds().slice().reverse().find(x=>x<st.t-1e-3);if(nb!==undefined){if(st.dir!==-1)stepsKey='';st.dir=-1;st.target=nb;}};
+fit();setView('sofa');setWay(1);document.getElementById('loading').remove();
+let clock=0,last=performance.now();
+function loop(now){requestAnimationFrame(loop);now=now||performance.now();const dt=Math.min(0.25,Math.max(0,(now-last)/1000));last=now;clock+=dt*3.6;
+if(st.target!==null){const sp=0.22*dt;if(Math.abs(st.target-st.t)<=sp){st.t=st.target;st.target=null;}else st.t+=Math.sign(st.target-st.t)*sp;update();}
 hand.scale.setScalar(1+0.18*Math.sin(clock*2));ctl.update();ren.render(scene,cam);placeLabels();}
-loop();
+window.__dbg={st,update,loop,setWay,setSizes,setView};
+requestAnimationFrame(loop);
+})();
 </script>
-
-<h2 style="font-size:18px;font-weight:600;margin:20px 0 4px">Approximate sizes</h2>
-<table><tr><th>Part</th><th>Size</th></tr>
-<tr><td>Peninsula</td><td>2.1 m long, 0.65 m deep, counter 0.9 m high</td></tr>
-<tr><td>Underside of the concrete beam</td><td>about 2.4 m from the floor</td></tr>
-<tr><td>Glass over the counter</td><td>about 1.45 to 1.5 m tall</td></tr>
-<tr><td>Walkway, peninsula to fridge cabinet</td><td>about 0.95 m wide</td></tr>
-<tr><td>Display cabinet beside the peninsula</td><td>about 1.2 m wide</td></tr>
-<tr><td>Folding panels (ways 1 and 2)</td><td>4 panels, about 53 x 145 cm each</td></tr>
-<tr><td>Sliding panels (way 3)</td><td>4 panels, about 55 x 150 cm each</td></tr>
-<tr><td>Side panels at the walkway (ways 1 and 3)</td><td>2 panels, about 84 x 240 cm each</td></tr>
-</table>
-<p style="font-size:13px">Frames: slim matt black aluminium. Glass: clear tempered. The track is meant to hang under the beam, hidden behind a cover strip.</p>
-</body></html>
+</body>
+</html>
