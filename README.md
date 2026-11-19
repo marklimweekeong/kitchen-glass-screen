@@ -1,3 +1,3 @@
-# Kitchen glass screen
+# Kitchen glass screen: brief and 3D model
 
-A 3D sketch of three ways to put away a glass screen around a kitchen peninsula. Open it at the GitHub Pages link for this repo. Not to scale; sizes are approximate.
+Our brief for glaziers: the sizes, an interactive 3D model of three ways to put away a glass screen around a kitchen peninsula, and our questions. Open it at the GitHub Pages link for this repo. Sizes are taken from our floor plan; heights are still to be measured on site.

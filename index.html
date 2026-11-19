@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kitchen glass screen · Mechanism study</title>
-<meta name="description" content="Interactive 3D study of three ways to close a kitchen with a glass screen and put it away.">
+<title>Kitchen glass screen · Brief and 3D model</title>
+<meta name="description" content="Our brief for glaziers: sizes, three ways to put the glass away in an interactive 3D model, and our questions.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='6' width='26' height='20' rx='3' fill='%231c1c1e'/%3E%3Crect x='7' y='10' width='8' height='12' fill='%23a9d8ea'/%3E%3Crect x='17' y='10' width='8' height='12' fill='%23a9d8ea'/%3E%3C/svg%3E">
-<meta property="og:title" content="Kitchen glass screen · Mechanism study">
-<meta property="og:description" content="Interactive 3D study: three ways to close a kitchen with a glass screen and put it away.">
+<meta property="og:title" content="Kitchen glass screen · Brief and 3D model">
+<meta property="og:description" content="Sizes, three ways to put the glass away in 3D, and our questions for glaziers.">
 <meta property="og:image" content="https://marklimweekeong.github.io/kitchen-glass-screen/og.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#fbfaf8">
@@ -76,7 +76,21 @@ th,td{text-align:left;padding:9px 4px;border-bottom:1px solid var(--line);vertic
 th{font-size:12px;color:var(--ink3);font-weight:500;text-transform:uppercase;letter-spacing:.05em}
 td:last-child{white-space:nowrap}
 tr:last-child td{border-bottom:0}
-footer{font-size:12.5px;color:var(--ink3);margin-top:6px}
+footer{font-size:12.5px;color:var(--ink3);margin-top:6px}footer a{color:var(--ink2)}
+h3{font-size:14px;font-weight:650;margin:18px 0 6px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}.toc a{font-size:13px;padding:6px 11px;border-radius:999px;background:var(--track);color:var(--ink);text-decoration:none;white-space:nowrap}.toc a:hover{background:#e6e3dd}
+[id]{scroll-margin-top:14px}
+.list{margin:0;padding-left:18px}.list li{margin:0 0 8px;color:var(--ink2)}.list li b{color:var(--ink);font-weight:600}.list li:last-child{margin-bottom:0}
+.qs{margin:0;padding-left:24px}.qs li{margin:0 0 8px;padding-left:2px}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:8px}.checks li{position:relative;padding-left:28px}.checks li::before{content:"";position:absolute;left:0;top:2px;width:16px;height:16px;border:1.5px solid var(--line2);border-radius:4px;background:#fff}
+.tw{overflow-x:auto;margin:0 -4px}
+table.t3 td:last-child{white-space:normal;color:var(--ink2)}table.t3 td:first-child{width:36%}table.t3 td:nth-child(2){white-space:nowrap}
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.way{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column}
+.way h3{margin:0 0 8px}
+.way dl{margin:0 0 10px;flex:1}.way dt{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin:8px 0 2px}.way dt:first-child{margin-top:0}.way dd{margin:0;font-size:14px;color:var(--ink2)}
+.linkbtn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:13.5px;font-weight:600;color:var(--accent);margin-top:12px;padding:4px 0}.linkbtn i{font-size:15px}.linkbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.way .linkbtn{margin-top:0}
 @media (max-width:640px){
  .wrap{padding:20px 14px 32px}
  h1{font-size:23px}
@@ -94,19 +108,29 @@ footer{font-size:12.5px;color:var(--ink3);margin-top:6px}
  .lbl{font-size:11px;padding:2px 6px}
  .mini button span{display:none}
  td:last-child{white-space:normal}
+ .ways{grid-template-columns:1fr}
+ .toc{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px 18px;padding:0 14px;scrollbar-width:none}.toc::-webkit-scrollbar{display:none}
+ table.t3 thead{display:none}
+ table.t3 tr{display:grid;grid-template-columns:1fr auto;column-gap:12px;padding:10px 4px;border-bottom:1px solid var(--line)}
+ table.t3 tr:last-child{border-bottom:0}
+ table.t3 td{border:0;padding:0}
+ table.t3 td:first-child{width:auto;font-weight:600;color:var(--ink)}
+ table.t3 td:nth-child(2){white-space:normal;text-align:right;color:var(--ink)}
+ table.t3 td:last-child{grid-column:1/-1;font-size:13px;margin-top:3px}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-<p class="eyebrow">Mechanism study · plan sizes</p>
+<p class="eyebrow">Brief for glaziers · 3D model</p>
 <h1>Kitchen glass screen</h1>
-<p class="lede">A glass screen closes the kitchen while cooking and is put away afterwards. Choose one of three ways below, then play each step to see how the glass moves and where it is stored.</p>
+<p class="lede">We want slim black-framed glass to close off our open kitchen while we cook, so cooking smells stay out of the living room, and to put the glass away when we're not cooking. Below is a 3D model of the three ways we're considering, then our sizes and questions.</p>
 <p class="note"><i class="ti ti-info-circle" aria-hidden="true"></i><span>Renovation has not started. The fridge, tall unit and cabinets can still move to suit whichever way works best.</span></p>
+<nav class="toc" aria-label="On this page"><a href="#model">3D model</a><a href="#want">What we want</a><a href="#sizes">Sizes</a><a href="#ways">The three ways</a><a href="#options">Side panel options</a><a href="#questions">Questions</a><a href="#back">What we need back</a></nav>
 </header>
 
-<nav class="seg" role="tablist" aria-label="Choose a way">
+<nav class="seg" id="model" role="tablist" aria-label="Choose a way">
 <button role="tab" data-w="1" aria-selected="true"><span class="t"><span class="full">1 · Folding stack</span><span class="short">1 · Stack</span></span><span class="d">Folds against the column, on show</span></button>
 <button role="tab" data-w="2" aria-selected="false"><span class="t"><span class="full">2 · Timber pocket</span><span class="short">2 · Pocket</span></span><span class="d">Folds into a slim box, out of sight</span></button>
 <button role="tab" data-w="3" aria-selected="false"><span class="t"><span class="full">3 · Display doors</span><span class="short">3 · Display</span></span><span class="d">Slides along and becomes the cabinet doors</span></button>
@@ -143,29 +167,138 @@ footer{font-size:12.5px;color:var(--ink3);margin-top:6px}
 <div class="facts" id="facts"></div>
 </section>
 
-<section class="card">
-<h2>Sizes</h2>
-<p class="sub">Measured from the floor plan, scaled from a room 3.0 m wide. Heights are estimates until measured on site.</p>
-<table>
-<thead><tr><th>Part</th><th>Size</th></tr></thead>
-<tbody>
-<tr><td>Peninsula counter</td><td>2.09 m long × 0.98 m deep, 0.9 m high</td></tr>
-<tr><td>Cabinets / bar overhang</td><td>0.58 m cabinets + 0.39 m bar overhang with stools</td></tr>
-<tr><td>Display cabinet (living side)</td><td>1.35 m wide × 0.39 m deep</td></tr>
-<tr><td>Full run along the living side</td><td>about 3.45 m</td></tr>
-<tr><td>Walkway, peninsula to fridge</td><td>0.91 m</td></tr>
-<tr><td>Kitchen aisle</td><td>0.97 m</td></tr>
-<tr><td>Fridge space</td><td>0.65 m wide</td></tr>
-<tr><td>Underside of concrete beam</td><td>about 2.4 m (to confirm)</td></tr>
-<tr><td>Glass over the counter</td><td>about 1.45–1.5 m tall</td></tr>
-<tr><td>Folding panels (ways 1, 2)</td><td>4 × about 53 × 145 cm</td></tr>
-<tr><td>Sliding panels (way 3)</td><td>4 × about 55 × 150 cm</td></tr>
-<tr><td>Side panels (ways 1, 3)</td><td>3 × about 66 × 240 cm</td></tr>
-</tbody>
-</table>
+<section class="card" id="want">
+<h2>What we want</h2>
+<ul class="list">
+<li><b>Where.</b> Along the living-room edge of a stone-topped kitchen peninsula (that side has a bar overhang with stools), from the countertop up to a concrete beam. At the end of the peninsula the glass turns and closes the walkway into the kitchen, floor to ceiling, up to the fridge.</li>
+<li><b>Finish.</b> Slim matt black aluminium frames and clear tempered glass. We are open to fluted glass if you recommend it.</li>
+<li><b>Home.</b> A flat in Singapore. Exact sizes will be confirmed when our interior designer measures on site.</li>
+<li><b>Nothing is built yet.</b> The fridge, the tall unit and the cabinets can still move to suit whichever way works best.</li>
+</ul>
 </section>
 
-<footer>Plan sizes are to the nearest centimetre or so; heights will be measured on site. Frames: slim matt black aluminium. Glass: clear tempered. Tracks hang under the beam behind a cover strip.</footer>
+<section class="card" id="sizes">
+<h2>Sizes</h2>
+<p class="sub">Measured from our floor plan, scaled from a room on it that is 3.0 m wide, so allow a few centimetres either way. Heights are not on the plan and are estimates.</p>
+<div class="tw"><table class="t3">
+<thead><tr><th>Item</th><th>Size</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>Peninsula length</td><td>2.09 m</td><td>Living-room edge is the main glass line</td></tr>
+<tr><td>Peninsula depth</td><td>0.98 m</td><td>0.58 m cabinets on the kitchen side plus a 0.39 m bar overhang on the living side</td></tr>
+<tr><td>Counter height</td><td>about 0.9 m</td><td>Sintered stone top</td></tr>
+<tr><td>Underside of beam</td><td>about 2.4 m</td><td>To confirm on site. Glass over the counter about 1.45 m tall</td></tr>
+<tr><td>Walkway, peninsula to fridge</td><td>0.91 m</td><td>Floor-to-ceiling glass here</td></tr>
+<tr><td>Display cabinet</td><td>1.35 m wide × 0.39 m deep</td><td>Beside the peninsula, on the living side. Glass doors from counter height to ceiling</td></tr>
+<tr><td>Living side, end to end</td><td>about 3.45 m</td><td>Display cabinet plus peninsula; the length of way 3's tracks</td></tr>
+<tr><td>Kitchen aisle</td><td>0.97 m</td><td>Between the peninsula and the hob counter</td></tr>
+<tr><td>Fridge space</td><td>0.65 m wide, about 0.64 m deep</td><td>End of the hob counter, next to a tall unit. Both can move</td></tr>
+<tr><td>Corridor beside the fridge</td><td>about 1.1 m</td><td>Ways 1 and 3 park the side panels here, taking about 15 to 20 cm</td></tr>
+</tbody>
+</table></div>
+<h3>Panel sizes and weights</h3>
+<p class="sub">Estimates, assuming 8 mm tempered glass at about 20 kg per square metre, plus the frame.</p>
+<div class="tw"><table class="t3">
+<thead><tr><th>Panel</th><th>Size (W × H)</th><th>Weight</th></tr></thead>
+<tbody>
+<tr><td>Folding panels along the peninsula (ways 1 and 2), 4 off</td><td>53 × 145 cm</td><td>about 19 kg each</td></tr>
+<tr><td>Sliding panels along the peninsula (way 3), 4 off</td><td>55 × 150 cm</td><td>about 20 kg each</td></tr>
+<tr><td>Side panels at the walkway (ways 1 and 3), 3 off</td><td>66 × 240 cm</td><td>about 35 kg each</td></tr>
+<tr><td>Corner panel over the end of the counter (way 2), 1 off</td><td>95 × 145 cm</td><td>about 30 kg</td></tr>
+<tr><td>Walkway door (way 2), 1 off</td><td>91 × 240 cm</td><td>about 48 kg</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section class="card" id="ways">
+<h2>The three ways to put the glass away</h2>
+<p class="sub">In all three, the screen closes the same opening: four panels along the peninsula, plus glass across the end of the peninsula and the walkway. They differ in where the glass goes when it is put away.</p>
+<div class="ways">
+<div class="way"><h3>1 · Folding stack on show</h3><dl>
+<dt>Along the peninsula</dt><dd>Four panels, top-hung bi-fold, from a track fixed under the beam and hidden behind a cover strip.</dd>
+<dt>Put away</dt><dd>They fold into a stack against the tall cabinet at the left end of the peninsula. The stack stands on the counter, about 15 × 55 cm, held by a magnet catch.</dd>
+<dt>Right end</dt><dd>Three full-height side panels, about 66 cm wide, on three tracks. They slide back beside the fridge and stack there, in the open or in a timber pocket.</dd>
+</dl><button class="linkbtn" data-goto-way="1">See it in 3D<i class="ti ti-arrow-up" aria-hidden="true"></i></button></div>
+<div class="way"><h3>2 · Folding into a timber pocket</h3><dl>
+<dt>Along the peninsula</dt><dd>The same bi-fold as way 1.</dd>
+<dt>Put away</dt><dd>The stack folds into a timber box on the end of the counter, 16 cm wide and the full 98 cm counter depth, closed by a hinged side door.</dd>
+<dt>Right end</dt><dd>The corner panel is hinged to the last folding panel and folds into the pocket with the others, making five panels. The walkway door slides into a slim timber pocket beside the fridge.</dd>
+</dl><button class="linkbtn" data-goto-way="2">See it in 3D<i class="ti ti-arrow-up" aria-hidden="true"></i></button></div>
+<div class="way"><h3>3 · Panels become the display cabinet doors</h3><dl>
+<dt>Along the peninsula</dt><dd>Four sliding panels on two parallel tracks, in synchronised pairs. The tracks run about 3.45 m under the beam, along the peninsula and on past the display cabinet.</dd>
+<dt>Put away</dt><dd>The panels slide sideways and park two layers deep in front of the display cabinet, so they become its doors. The display cabinet has no doors of its own.</dd>
+<dt>Right end</dt><dd>The same three side panels as way 1.</dd>
+</dl><button class="linkbtn" data-goto-way="3">See it in 3D<i class="ti ti-arrow-up" aria-hidden="true"></i></button></div>
+</div>
+</section>
+
+<section class="card" id="options">
+<h2>Options for the side panels and walkway door</h2>
+<p class="sub">These apply to whichever way we choose. We would like your view on each.</p>
+<ul class="list">
+<li><b>In the open.</b> The side panels stack beside the fridge, on show. This is the simplest.</li>
+<li><b>Timber pocket.</b> A slim cabinet, about 20 cm wide, in the same wood as the kitchen, hides the parked panels. Placed beside the fridge, it stands about 20 cm into the corridor.</li>
+<li><b>Move the fridge in.</b> Because nothing is built yet, the fridge and the end of the peninsula could move about 20 cm inwards. The timber pocket would then sit flush with the kitchen, and the corridor keeps its full width.</li>
+<li><b>Way 2's walkway door.</b> A single 91 cm door needs a pocket longer than the fridge is deep (about 64 cm), so the pocket would run about 30 cm past the fridge. Two telescopic leaves would need only about half that length.</li>
+</ul>
+<button class="linkbtn" data-goto-pocket="1">See the timber pocket in 3D<i class="ti ti-arrow-up" aria-hidden="true"></i></button>
+</section>
+
+<section class="card" id="questions">
+<h2>Questions for you</h2>
+<p class="sub">Please answer for each of the three ways. If one isn't workable, tell us why and what you would do instead.</p>
+<h3>Track and fixing</h3>
+<ol class="qs">
+<li>What size is the track for each way (height × width), and how many tracks side by side?</li>
+<li>Can the track be screwed to the underside of the concrete beam, with no hacking or chasing? What fixings do you use?</li>
+<li>Can the track be hidden behind a cover strip, flush with the face of the beam, so only a slim line shows? How deep must that strip be?</li>
+<li>If the beam is narrower than the tracks, or not where we think, what is your fallback? For example a slim bulkhead, or a surface track with a cover.</li>
+<li>There is probably no beam over the walkway and the corridor beside the fridge. How would you hang the side panels' tracks there?</li>
+</ol>
+<h3>Panels and movement</h3>
+<ol class="qs" start="6">
+<li>Are our panel sizes and weights within your system's limits? What glass thickness do you recommend?</li>
+<li>Is a bottom guide needed on the stone countertop? Would it be a groove cut into the stone, a surface channel, or a guide only where the panels park?</li>
+<li>Ways 1 and 2: can your bi-fold park four panels against one end and hold them with a magnet or latch? Can it take five panels, for way 2's corner panel?</li>
+<li>Way 3: can you do synchronised sliding pairs on two tracks over about 3.45 m? Can the panels slide past the corner where the peninsula meets the display cabinet? Can the parked panels work as the display cabinet's doors?</li>
+<li>Side panels: can three full-height panels, about 66 cm wide, telescope back and stack beside the fridge? How much corridor width do they and their tracks take? Could they slide into a slim timber pocket instead, and how wide must it be? For way 2's walkway door, would you use one leaf in a long pocket, or two telescopic leaves in a shorter one?</li>
+</ol>
+<h3>Sealing and finish</h3>
+<ol class="qs" start="11">
+<li>How well does each way keep cooking smells in? Where are the gaps, and which seals do you use (brush, magnetic)?</li>
+<li>Can the front glass meet the side glass at the corner without a post?</li>
+<li>How slim can the black frames be? What does fluted glass add to the price?</li>
+</ol>
+</section>
+
+<section class="card" id="back">
+<h2>What we need back</h2>
+<ul class="checks">
+<li>Which of the three ways you can build, and which you recommend</li>
+<li>An itemised quote for each way you can build: glass, frames, tracks and hardware, cover strip, installation, GST</li>
+<li>The hardware brand and system you would use</li>
+<li>Track size and fixing method, for the beam and for the walkway side</li>
+<li>Lead time from site measurement to installation</li>
+<li>Warranty on glass, hardware and installation</li>
+<li>Photos of similar folding or sliding glass screens you have installed</li>
+<li>Whether you need a site visit before quoting, and its cost</li>
+</ul>
+</section>
+
+<section class="card" id="confirm">
+<h2>Still to confirm with our interior designer</h2>
+<ul class="list">
+<li>The beam: its exact position over the peninsula edge, its width and depth, and whether two tracks and a cover strip fit under it.</li>
+<li>The heights: counter, underside of the beam, and ceiling over the walkway.</li>
+<li>Way 3: whether the display cabinet's front can line up exactly with the peninsula's edge, so the panels slide past the corner.</li>
+<li>Whether the ceiling over the walkway and beside the fridge can carry a track, or needs a slim bulkhead.</li>
+<li>Whether to give up about 20 cm of the corridor to the side panels, or move the fridge and the end of the peninsula about 20 cm inwards.</li>
+<li>Whether HDB or MCST approval is needed for the tracks and the glass screen.</li>
+<li>Carpentry for any timber pockets.</li>
+<li>Whether the glass should stand on the cabinet line, 0.39 m further in, so the bar stays usable while the glass is closed.</li>
+</ul>
+</section>
+
+<footer>Sizes are from our floor plan; heights will be measured on site. HDB does not allow hacking into structural beams (<a href="https://www.hdb.gov.sg/cs/infoweb/residential/living-in-an-hdb-flat/renovation/important-information" target="_blank" rel="noopener">HDB renovation guidelines</a>).</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -264,6 +397,9 @@ function setSizes(on){showSizes=on;document.getElementById('bSizes').setAttribut
 document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>setWay(+b.dataset.w));
 document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>setView(b.dataset.v));
 document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>setPark(b.dataset.p));
+const toModel=()=>document.getElementById('model').scrollIntoView({behavior:'smooth',block:'start'});
+document.querySelectorAll('[data-goto-way]').forEach(b=>b.onclick=()=>{setWay(+b.dataset.gotoWay);toModel();});
+document.querySelectorAll('[data-goto-pocket]').forEach(b=>b.onclick=()=>{if(st.way==2)setWay(1);setPark('pocket');st.t=1;st.dir=1;st.target=null;stepsKey='';update();toModel();});
 document.getElementById('bNames').onclick=()=>setSizes(false);document.getElementById('bSizes').onclick=()=>setSizes(true);
 const sl=document.getElementById('t');sl.oninput=()=>{const nt=sl.value/100;if(nt!==st.t){st.dir=nt>st.t?1:-1;stepsKey='';}st.t=nt;st.target=null;update();};
 document.getElementById('bAway').onclick=()=>{if(st.t>=1)st.t=0;if(st.dir!==1)stepsKey='';st.dir=1;st.target=1;};
