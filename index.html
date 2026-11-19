@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kitchen glass screen: three ways to put it away</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{--surface-1:#f7f6f3;--surface-2:#fff;--text-primary:#1f1e1d;--text-secondary:#5f5e5a;--text-muted:#888780;--border:rgba(0,0,0,.12);--border-strong:rgba(0,0,0,.25);--border-accent:#378ADD;--bg-accent:#E6F1FB;--text-accent:#185FA5}
+*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;max-width:760px;margin:0 auto;padding:16px;color:var(--text-primary);line-height:1.55;-webkit-text-size-adjust:100%}
+h1{font-size:22px;font-weight:600;margin:4px 0 6px}p{margin:0 0 12px;color:var(--text-secondary);font-size:15px}
+button{font:inherit;font-size:15px;min-height:40px;padding:6px 12px;border-radius:8px;border:1px solid var(--border-strong);background:#fff;color:var(--text-primary);cursor:pointer}
+input[type=range]{height:32px}.sr-only{position:absolute;left:-9999px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 16px}td,th{text-align:left;padding:7px 6px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--text-secondary);font-weight:500}
+@media (max-width:520px){.lbl{font-size:11px!important;padding:1px 4px!important}}
+</style></head><body>
+<h1>Kitchen glass screen: three ways to put it away</h1>
+<p>A 3D sketch of the glass screen we are planning around our kitchen peninsula. Pick a way, then press <b>Put it away</b> or <b>Take it out</b> to see each step. Not to scale; sizes are approximate and will be measured on site.</p>
+<h2 class="sr-only">Interactive 3D model of the kitchen peninsula glass screen, showing step by step how a person puts the glass away and takes it out in three different ways.</h2>
+<style>
+.wb{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.wb button.on{background:var(--bg-accent);color:var(--text-accent);border-color:var(--border-accent)}
+.dim{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
+.lbl{position:absolute;transform:translate(-50%,-100%);font-size:12px;line-height:1.3;padding:2px 6px;border-radius:6px;background:var(--surface-2);color:var(--text-primary);border:0.5px solid var(--border);white-space:nowrap;pointer-events:none}
+</style>
+<div class="wb" id="ways">
+<button data-w="1">1 Stack on show</button>
+<button data-w="2">2 Wood pocket</button>
+<button data-w="3">3 Display doors</button>
+</div>
+<div id="stage" style="position:relative;width:100%;height:min(460px,95vw);min-height:300px;border-radius:12px;border:0.5px solid var(--border);overflow:hidden;background:var(--surface-1)"></div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 8px">
+<button id="bAway">Put it away <i class="ti ti-player-play" aria-hidden="true"></i></button>
+<button id="bOut">Take it out <i class="ti ti-player-play" aria-hidden="true"></i></button>
+<button id="bPrev" aria-label="Previous step"><i class="ti ti-chevron-left" aria-hidden="true"></i></button>
+<button id="bNext" aria-label="Next step"><i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin:0 0 8px">
+<span style="font-size:13px;color:var(--text-secondary)">Closed</span>
+<input type="range" id="t" min="0" max="100" step="1" value="0" style="flex:1;min-width:120px">
+<span style="font-size:13px;color:var(--text-secondary)">Stored</span>
+</div>
+<div id="cap" style="font-size:14px;line-height:1.5;color:var(--text-primary);min-height:42px;margin:0 0 8px"></div>
+<div class="wb">
+<button id="bNames">Names</button>
+<button id="bSizes">Sizes</button>
+<button data-v="sofa">Sofa view</button>
+<button data-v="top">Top view</button>
+<button data-v="kitchen">Kitchen view</button>
+<span style="font-size:12px;color:var(--text-muted);align-self:center">Drag to rotate, pinch or scroll to zoom. Orange dot = where your hand goes.</span>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const st={way:1,t:0,target:null,dir:1};
+const stage=document.getElementById('stage');let Wd=stage.clientWidth,Ht=stage.clientHeight;
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(38,Wd/Ht,5,5000);
+const ren=new THREE.WebGLRenderer({antialias:true,alpha:true});ren.setPixelRatio(window.devicePixelRatio);ren.setSize(Wd,Ht);stage.appendChild(ren.domElement);
+const ctl=new THREE.OrbitControls(cam,ren.domElement);ctl.enableDamping=true;
+scene.add(new THREE.AmbientLight(0xffffff,0.62));const dl=new THREE.DirectionalLight(0xffffff,0.55);dl.position.set(300,500,420);scene.add(dl);
+const M=c=>new THREE.MeshLambertMaterial({color:c}),TM=(c,o)=>new THREE.MeshLambertMaterial({color:c,transparent:true,opacity:o,depthWrite:false});
+const WOOD=M(0x4a3222),STONE=M(0xebe3d4),SHELF=M(0xead9b8),STEEL=M(0xb7bcc2),FLOOR=M(0xc9b597),FR=M(0x151515),OVEN=M(0x1d1d1d),MAG=M(0x8a8a8a);
+const GL=TM(0x9fd3e6,0.3),BEAM=TM(0xf3efe7,0.42),POCK=TM(0x7a5236,0.5),HAND=M(0xe8742c);
+const EDGE=new THREE.LineBasicMaterial({color:0x222222,transparent:true,opacity:0.35});
+function box(x0,x1,y0,y1,z0,z1,mat,edges=true,parent=scene){const m=new THREE.Mesh(new THREE.BoxGeometry(x1-x0,y1-y0,z1-z0),mat);m.position.set((x0+x1)/2,(y0+y1)/2,(z0+z1)/2);if(edges)m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),EDGE));parent.add(m);return m;}
+function panel(w,h){const g=new THREE.Group(),f=2.5,t=2.5;const fr=(x,y,ww,hh)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(ww,hh,t),FR);m.position.set(x+ww/2,y+hh/2,0);g.add(m)};fr(0,0,w,f);fr(0,h-f,w,f);fr(0,0,f,h);fr(w-f,0,f,h);const gl=new THREE.Mesh(new THREE.BoxGeometry(w-2*f,h-2*f,0.8),GL);gl.position.set(w/2,h/2,0);g.add(gl);scene.add(g);return g;}
+function slab(w,h,mat){const g=new THREE.Group(),m=new THREE.Mesh(new THREE.BoxGeometry(w,h,1.8),mat);m.position.set(w/2,h/2,0);m.add(new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),EDGE));g.add(m);scene.add(g);return g;}
+function place(p,x,y,z,a){p.position.set(x,y,z);p.rotation.y=a;}
+const fl=new THREE.Mesh(new THREE.PlaneGeometry(900,800),FLOOR);fl.rotation.x=-Math.PI/2;fl.position.set(50,0,-80);scene.add(fl);
+box(-125,0,0,240,-100,-35,WOOD);box(-112,-52,118,160,-101,-100,OVEN,false);
+box(-125,0,0,90,-35,0,WOOD);box(-125,0,236,240,-35,0,WOOD);box(-125,-120,90,236,-35,0,WOOD);box(-5,0,90,236,-35,0,WOOD);
+box(-120,-5,90,236,-35,-30,SHELF,false);for(const y of[125,160,195])box(-120,-5,y,y+2,-30,-2,SHELF);
+const dispGlass=[panel(57.5,146),panel(57.5,146)];place(dispGlass[0],-120,90,1,0);place(dispGlass[1],-62.5,90,1,0);
+box(0,210,0,88,-65,0,WOOD);box(0,210,88,92,-65,2,STONE);
+box(-125,140,0,88,-225,-165,WOOD);box(-125,140,88,92,-225,-163,STONE);
+box(140,210,0,240,-230,-160,WOOD);box(146,204,6,185,-162.5,-159,STEEL,false);
+box(-130,215,240,262,-22,8,BEAM,false);
+const trk1=box(0,212,238,243,-5,-1,FR,false),trk3a=box(-122,212,238,243,2,6,FR,false),trk3b=box(-122,212,238,243,7,11,FR,false),trkD=box(212,216,238,243,-258,-60,FR,false);
+const mag=box(0,2,150,170,-40,-20,MAG,false);
+const PK=new THREE.Group();scene.add(PK);box(0,16,92,238,-2,0,POCK,true,PK);box(0,16,236,238,-62,0,POCK,true,PK);box(0,16,92,238,-62,-60,POCK,true,PK);
+const side=slab(58,144,POCK);
+const DP=new THREE.Group();scene.add(DP);box(224,226,0,240,-258,-158,POCK,true,DP);box(210,226,0,240,-260,-258,POCK,true,DP);box(210,226,238,240,-258,-158,POCK,true,DP);
+const W=52.5,L=[0,1,2,3].map(()=>panel(W,144)),S=[0,1,2,3].map(()=>panel(W+2,150)),C=panel(62,144),D=panel(95,236);
+const SP=[panel(84,236),panel(84,236)];const trkS=box(212,222,238,243,-248,10,FR,false);
+const hand=new THREE.Mesh(new THREE.SphereGeometry(6,20,14),HAND);scene.add(hand);
+const labels={};function lab(k,txt){const d=document.createElement('div');d.className='lbl';d.textContent=txt;stage.appendChild(d);labels[k]=d;}
+lab('disp','Display cabinet');lab('tall','Tall unit');lab('pen','Peninsula');lab('fr','Fridge');lab('door','Walkway door');lab('corner','Corner panel');lab('trk','Track in beam');lab('pk','Wood pocket');lab('side','Pocket side door');lab('dpk','Door pocket');lab('mag','Magnet catch');lab('t3','Two tracks in beam');lab('sp','Side panels');lab('trkS','Side tracks in ceiling');
+const cl=v=>Math.max(0,Math.min(1,v));
+const DIMM=new THREE.LineBasicMaterial({color:0x185FA5});const dimG=new THREE.Group();scene.add(dimG);
+function dline(a,b){const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...a),new THREE.Vector3(...b)]);dimG.add(new THREE.Line(g,DIMM));}
+dline([0,96,14],[210,96,14]);dline([0,90,14],[0,102,14]);dline([210,90,14],[210,102,14]);
+dline([228,96,0],[228,96,-65]);dline([222,96,0],[234,96,0]);dline([222,96,-65],[234,96,-65]);
+dline([232,2,-65],[232,2,-160]);dline([226,2,-65],[238,2,-65]);dline([226,2,-160],[238,2,-160]);
+dline([-128,0,14],[-128,240,14]);dline([-134,240,14],[-122,240,14]);
+dline([-120,94,10],[-5,94,10]);
+const dims=[['Peninsula 2.1 m long',[125,82,16]],['Depth 0.65 m',[246,100,-40]],['Counter 0.9 m high',[2,28,6]],['Beam underside 2.4 m',[-128,250,16]],['Glass about 1.45 m tall',[150,170,8]],['Walkway 0.95 m',[234,14,-112]],['Display cabinet 1.2 m',[-62,100,14]]];
+const dimEls=dims.map(d=>{const e=document.createElement('div');e.className='lbl dim';e.textContent=d[0];stage.appendChild(e);return e;});
+let showSizes=false;function setSizes(on){showSizes=on;dimG.visible=on;dimEls.forEach(e=>e.style.display=on?'':'none');document.getElementById('bSizes').classList.toggle('on',on);document.getElementById('bNames').classList.toggle('on',!on);update();}
+const PH={1:[[0,.1,'Unlatch the end panel from the side panel at the corner.','Latch the end panel to the side panel at the corner. The kitchen is now closed.'],[.1,.3,'Slide the two side panels back along the fridge cabinet. They stack there, out of the way.','Pull the two side panels out from beside the fridge to the front corner.'],[.3,.9,'Push the end panel towards the column. The four panels fold up like a concertina.','Pull the end panel by its handle along the counter. The panels unfold behind it.'],[.9,1,'Press the folded stack against the column until the magnet catches. Stored: the stack is on show at the column, nothing at the corner.','Pull the stack off its magnet catch on the column.']],
+2:[[0,.15,'Slide the walkway door into its pocket beside the fridge.','Pull the walkway door out of its pocket to the peninsula. The kitchen is now closed.'],[.15,.3,'Swing the corner panel in, flat against the end panel.','Swing the corner panel out to close off the end of the peninsula.'],[.3,.4,'Open the pocket\'s side door.','Close the pocket side door behind the glass.'],[.4,.88,'Push the end panel back. The panels fold up into the pocket.','Pull the end panel out. The panels unfold along the counter.'],[.88,1,'Close the side door. Stored: the glass is inside the wood pocket.','Open the pocket\'s side door.']],
+3:[[0,.15,'Slide the two side panels back along the fridge cabinet. They stack there, out of the way.','Pull the two side panels out from beside the fridge to meet the front glass. The kitchen is now closed.'],[.15,.55,'Push the left pair along the tracks. It parks over the left half of the display cabinet.','Pull the left pair out from the display cabinet to the middle of the peninsula.'],[.55,.95,'Push the right pair along. It parks over the right half of the display cabinet.','Pull the right pair from the display cabinet out to the corner.'],[.95,1,'Stored: the panels are the display cabinet doors, and nothing is left at the corner.','Start from the display cabinet: its glass doors are the screen panels.']]};
+let handPos=[0,0,0];
+function update(){const t=st.t,w=st.way,ph=PH[w],u=ph.map(p=>cl((t-p[0])/(p[1]-p[0])));
+L.forEach(p=>p.visible=w<3);S.forEach(p=>p.visible=w==3);dispGlass.forEach(p=>p.visible=w!=3);PK.visible=side.visible=DP.visible=w==2;trk1.visible=w<3;trk3a.visible=trk3b.visible=w==3;mag.visible=w==1;
+let hp=null;D.visible=C.visible=w==2;SP.forEach(p=>p.visible=w!=2);trkS.visible=w!=2;trkD.visible=w==2;
+if(w==2){const dz=-65-95*u[0];place(D,214,0,dz,Math.PI/2);if(u[0]>0&&u[0]<1||t<ph[0][1])hp=[214,120,dz];}
+else{const su=w==1?u[1]:u[0],a0=w==1?0:8,sw=84,s0=a0+(-160-a0)*su,s1=(a0-sw)+(-160-(a0-sw))*su;place(SP[0],220,0,s0,Math.PI/2);place(SP[1],215,0,s1,Math.PI/2);const sp0=w==1?ph[1]:ph[0];if(t>=sp0[0]&&t<sp0[1])hp=[222,120,s0];}
+if(w<3){const fu=w==1?u[2]:u[3],th=Math.PI/2*fu;let px=1,pz=-3;for(let i=0;i<4;i++){const a=i%2==0?th:-th;place(L[i],px,92,pz,a);px+=W*Math.cos(a)+3*fu;pz-=W*Math.sin(a);}
+if(w==1){if(t<ph[0][1])hp=[211,150,-3];if(t>=ph[2][0]&&t<ph[3][0])hp=[px,150,pz];if(t>=ph[3][0])hp=[14,150,-30];}
+else{let ca=Math.PI/2+Math.PI/2*u[1];if(u[3]>0)ca=Math.PI-th;place(C,px,92,pz-3*Math.min(1,u[1]+u[3]),ca);const sa=-Math.PI/2+Math.PI/2*(u[2]-u[4]);place(side,16,92,-62,sa);
+const sx=16+58*Math.cos(sa),sz=-62-58*Math.sin(sa);if(t>=ph[1][0]&&t<ph[2][0])hp=[px+62*Math.cos(ca),150,pz-62*Math.sin(ca)];if((t>=ph[2][0]&&t<ph[3][0])||t>=ph[4][0])hp=[sx,150,sz];if(t>=ph[3][0]&&t<ph[4][0])hp=[px,150,pz];}}
+else{const p1=u[1],p2=u[2],xs=[0+(-120-0)*p1,52.5+(-120-52.5)*p1,105+(-62.5-105)*p2,157.5+(-62.5-157.5)*p2],zs=[4,9,4,9];for(let i=0;i<4;i++)place(S[i],xs[i],86,zs[i],0);
+if(t>=ph[1][0]&&t<ph[2][0])hp=[xs[1]+52,150,12];if(t>=ph[2][0]&&t<ph[3][0])hp=[xs[3]+52,150,12];if(t>=ph[3][0])hp=[-62,170,12];}
+if(t>=1-1e-6&&st.dir>0)hp=null;hand.visible=!!hp;if(hp){handPos=hp;hand.position.set(...hp);}
+labels.pk.style.display=labels.side.style.display=labels.dpk.style.display=w==2?'':'none';labels.mag.style.display=w==1?'':'none';labels.trk.style.display=w<3?'':'none';labels.t3.style.display=w==3?'':'none';labels.corner.style.display=(w!=2||t>0.2)?'none':'';labels.door.style.display=w==2?'':'none';labels.sp.style.display=labels.trkS.style.display=w!=2?'':'none';
+let k=ph.findIndex(p=>t<p[1]||(p===ph[ph.length-1]));if(st.dir<0){k=ph.findIndex(p=>t<=p[1]);if(k<0)k=ph.length-1;}
+const n=ph.length;if(st.dir>0){document.getElementById('cap').textContent='Putting away, step '+(k+1)+' of '+n+': '+ph[k][2];}else{const r=n-k;document.getElementById('cap').textContent='Taking out, step '+r+' of '+n+': '+ph[k][3];}
+document.getElementById('t').value=Math.round(t*100);}
+const anchors={disp:[-70,215,3],tall:[-95,252,-95],pen:[110,94,-30],fr:[175,250,-195],trk:[170,272,-5],t3:[110,272,10],pk:[8,128,2],side:[17,205,-55],dpk:[225,250,-215],mag:[0,190,-30]};
+function lp(k){if(k=='sp'){const su=st.way==1?cl((st.t-.1)/.2):cl(st.t/.15);return[222,236,(st.way==1?0:8)+(-160-(st.way==1?0:8))*su-40];}if(k=='trkS')return[217,262,-95];if(k=='door')return[214,150,-112-95*cl(st.t/PH[st.way][0][1])];if(k=='corner')return[211,240,-34];return anchors[k];}
+function placeLabels(){dims.forEach((d,i)=>{const v=new THREE.Vector3(...d[1]).project(cam),e=dimEls[i];if(v.z>1){e.style.visibility='hidden';return;}e.style.visibility='';e.style.left=((v.x+1)/2*Wd)+'px';e.style.top=((1-v.y)/2*Ht)+'px';});for(const k in labels){if(showSizes){labels[k].style.visibility='hidden';continue;}const v=new THREE.Vector3(...lp(k)).project(cam),d=labels[k];if(v.z>1){d.style.visibility='hidden';continue;}d.style.visibility='';d.style.left=((v.x+1)/2*Wd)+'px';d.style.top=((1-v.y)/2*Ht)+'px';}}
+const views={sofa:[[560,320,470],[45,100,-70]],top:[[60,880,170],[45,100,-70]],kitchen:[[320,190,-130],[40,125,-30]]};
+let curView='sofa';function setView(v){curView=v;const p=views[v][0],tg=views[v][1],f=Math.max(1,1.2/(Wd/Ht));cam.position.set(tg[0]+(p[0]-tg[0])*f,tg[1]+(p[1]-tg[1])*f,tg[2]+(p[2]-tg[2])*f);ctl.target.set(...tg);ctl.update();}
+function fit(){Wd=stage.clientWidth;Ht=stage.clientHeight;ren.setSize(Wd,Ht);cam.aspect=Wd/Ht;cam.updateProjectionMatrix();}
+window.addEventListener('resize',()=>{fit();setView(curView);});
+function setWay(w){st.way=w;document.querySelectorAll('#ways button').forEach(b=>b.classList.toggle('on',+b.dataset.w==w));update();}
+document.querySelectorAll('#ways button').forEach(b=>b.onclick=()=>setWay(+b.dataset.w));
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>setView(b.dataset.v));
+const sl=document.getElementById('t');sl.oninput=()=>{const nt=sl.value/100;st.dir=nt>=st.t?1:-1;st.t=nt;st.target=null;update();};
+document.getElementById('bAway').onclick=()=>{if(st.t>=1)st.t=0;st.dir=1;st.target=1;};
+document.getElementById('bOut').onclick=()=>{if(st.t<=0)st.t=1;st.dir=-1;st.target=0;};
+function bounds(){return[0,...PH[st.way].map(p=>p[1])];}
+document.getElementById('bNext').onclick=()=>{const b=bounds();const nb=b.find(x=>x>st.t+1e-3);if(nb!==undefined){st.dir=1;st.target=nb;}};
+document.getElementById('bPrev').onclick=()=>{const b=bounds().slice().reverse();const nb=b.find(x=>x<st.t-1e-3);if(nb!==undefined){st.dir=-1;st.target=nb;}};
+fit();setView('sofa');setWay(1);document.getElementById('bSizes').onclick=()=>setSizes(true);document.getElementById('bNames').onclick=()=>setSizes(false);setSizes(false);
+let clock=0;function loop(){requestAnimationFrame(loop);clock+=0.06;if(st.target!==null){const sp=0.004;if(Math.abs(st.target-st.t)<=sp){st.t=st.target;st.target=null;}else st.t+=Math.sign(st.target-st.t)*sp;update();}
+hand.scale.setScalar(1+0.18*Math.sin(clock*2));ctl.update();ren.render(scene,cam);placeLabels();}
+loop();
+</script>
+
+<h2 style="font-size:18px;font-weight:600;margin:20px 0 4px">Approximate sizes</h2>
+<table><tr><th>Part</th><th>Size</th></tr>
+<tr><td>Peninsula</td><td>2.1 m long, 0.65 m deep, counter 0.9 m high</td></tr>
+<tr><td>Underside of the concrete beam</td><td>about 2.4 m from the floor</td></tr>
+<tr><td>Glass over the counter</td><td>about 1.45 to 1.5 m tall</td></tr>
+<tr><td>Walkway, peninsula to fridge cabinet</td><td>about 0.95 m wide</td></tr>
+<tr><td>Display cabinet beside the peninsula</td><td>about 1.2 m wide</td></tr>
+<tr><td>Folding panels (ways 1 and 2)</td><td>4 panels, about 53 x 145 cm each</td></tr>
+<tr><td>Sliding panels (way 3)</td><td>4 panels, about 55 x 150 cm each</td></tr>
+<tr><td>Side panels at the walkway (ways 1 and 3)</td><td>2 panels, about 84 x 240 cm each</td></tr>
+</table>
+<p style="font-size:13px">Frames: slim matt black aluminium. Glass: clear tempered. The track is meant to hang under the beam, hidden behind a cover strip.</p>
+</body></html>
