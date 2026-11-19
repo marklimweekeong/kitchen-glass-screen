@@ -130,7 +130,7 @@ function bounds(){return[0,...PH[st.way].map(p=>p[1])];}
 document.getElementById('bNext').onclick=()=>{const b=bounds();const nb=b.find(x=>x>st.t+1e-3);if(nb!==undefined){st.dir=1;st.target=nb;}};
 document.getElementById('bPrev').onclick=()=>{const b=bounds().slice().reverse();const nb=b.find(x=>x<st.t-1e-3);if(nb!==undefined){st.dir=-1;st.target=nb;}};
 fit();setView('sofa');setWay(1);document.getElementById('bSizes').onclick=()=>setSizes(true);document.getElementById('bNames').onclick=()=>setSizes(false);setSizes(false);
-let clock=0;function loop(){requestAnimationFrame(loop);clock+=0.06;if(st.target!==null){const sp=0.004;if(Math.abs(st.target-st.t)<=sp){st.t=st.target;st.target=null;}else st.t+=Math.sign(st.target-st.t)*sp;update();}
+let clock=0,last=performance.now();function loop(now){requestAnimationFrame(loop);now=now||performance.now();const dt=Math.min(0.1,Math.max(0,(now-last)/1000));last=now;clock+=dt*3.6;if(st.target!==null){const sp=0.22*dt;if(Math.abs(st.target-st.t)<=sp){st.t=st.target;st.target=null;}else st.t+=Math.sign(st.target-st.t)*sp;update();}
 hand.scale.setScalar(1+0.18*Math.sin(clock*2));ctl.update();ren.render(scene,cam);placeLabels();}
 loop();
 </script>
